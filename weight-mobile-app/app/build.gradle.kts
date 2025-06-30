@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "pl.kuczabinski.weights"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "pl.kuczabinski.weights"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
