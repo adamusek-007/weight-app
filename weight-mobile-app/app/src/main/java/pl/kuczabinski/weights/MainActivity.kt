@@ -40,6 +40,7 @@ class MainActivity : ComponentActivity() {
 
                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                             Toast.makeText(this@MainActivity, "Błąd sieci!", Toast.LENGTH_SHORT).show()
+                            Log.e("API_ERROR", "onFailure: ${t.message}", t)
                         }
                     })
             } else {
