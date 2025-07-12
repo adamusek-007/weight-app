@@ -1,4 +1,3 @@
 package pl.kuczabinski.weights
 
-class Weight(val weightValue: Float) {
-}
+class Weight(val weightValue: Float)
