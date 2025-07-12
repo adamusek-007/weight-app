@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    function register(Request $request)
+    public function register(Request $request)
     {
         $validate = Validator::make(
             $request->all(),
@@ -20,7 +20,7 @@ class AuthController extends Controller
             ]
         );
 
-        if ($validate->fail()) {
+        if ($validate->fails()) {
             return response()->json(
                 [
                     "status" => 'error',
