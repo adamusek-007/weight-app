@@ -14,13 +14,11 @@ interface ApiService {
 
     @POST("register")
     fun postRegister(
-//        @Header("Authorization") authToken: String,
         @Body user: User
     ): Call<ResponseBody>
 
     @POST("login")
     fun postLogin(
-//        @Header("Authorization") authToken: String,
         @Body user: User
     ): Call<ResponseBody>
 }
