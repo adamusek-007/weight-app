@@ -16,10 +16,3 @@ Route::middleware('auth:sanctum')->group(function () {
         return App\Models\User::all();
     });
 });
-
-
-
-
-// Route::post('weights', [WeightController::class, 'store']);
-// Route::post('register', [RegisterController::class, 'register'])->name('register');
-// Route::post('login', [RegisterController::class, 'login'])->name('login');
