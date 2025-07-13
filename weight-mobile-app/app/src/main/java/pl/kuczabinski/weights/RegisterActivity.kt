@@ -38,7 +38,7 @@ class RegisterActivity : ComponentActivity() {
         name = editTextName.text.toString()
         email = editTextEmail.text.toString()
         password = editTextPassword.text.toString()
-        var user: User = User(name, email, password)
+        var user: User = User(name=name, email=email, password=password)
 
         RetrofitClient.apiService.postRegister(user)
             .enqueue(object : Callback<ResponseBody> {
@@ -46,7 +46,6 @@ class RegisterActivity : ComponentActivity() {
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
-                    Log.d("error", "Response: " + response.toString())
                     if(response.isSuccessful){
                         var intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                         startActivity(intent)
@@ -58,7 +57,6 @@ class RegisterActivity : ComponentActivity() {
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Log.d("error", "Error: " + t.localizedMessage)
                     Toast.makeText(applicationContext, "Error" + t.localizedMessage, Toast.LENGTH_SHORT).show()
                 }
             })
