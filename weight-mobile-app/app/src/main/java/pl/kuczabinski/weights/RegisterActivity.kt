@@ -3,7 +3,6 @@ package pl.kuczabinski.weights
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -18,8 +17,6 @@ class RegisterActivity : ComponentActivity() {
     private lateinit var editTextEmail: EditText
     private lateinit var editTextPassword: EditText
     private lateinit var button: Button
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +35,7 @@ class RegisterActivity : ComponentActivity() {
         name = editTextName.text.toString()
         email = editTextEmail.text.toString()
         password = editTextPassword.text.toString()
-        var user: User = User(name=name, email=email, password=password)
+        var user: User = User(name = name, email = email, password = password)
 
         RetrofitClient.apiService.postRegister(user)
             .enqueue(object : Callback<ResponseBody> {
@@ -46,18 +43,25 @@ class RegisterActivity : ComponentActivity() {
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
-                    if(response.isSuccessful){
+                    if (response.isSuccessful) {
                         var intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                         startActivity(intent)
                         finish()
-                    }
-                    else {
-                        Toast.makeText(applicationContext, "Error please try again", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "Error please try again",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Toast.makeText(applicationContext, "Error" + t.localizedMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Error" + t.localizedMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             })
     }

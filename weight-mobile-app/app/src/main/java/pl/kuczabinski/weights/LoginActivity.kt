@@ -3,32 +3,31 @@ package pl.kuczabinski.weights
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.core.content.edit
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.core.content.edit
 
 class LoginActivity : ComponentActivity() {
 
-        private lateinit var editTextEmail: EditText
-        private lateinit var editTextPassword: EditText
-        private lateinit var loginButton: Button
-        private lateinit var registerTextView: TextView
-        private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editTextEmail: EditText
+    private lateinit var editTextPassword: EditText
+    private lateinit var loginButton: Button
+    private lateinit var registerTextView: TextView
+    private lateinit var sharedPreferences: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        sharedPreferences  = application.getSharedPreferences("pl.kuczabinski.weights", MODE_PRIVATE)
+        sharedPreferences = application.getSharedPreferences("pl.kuczabinski.weights", MODE_PRIVATE)
         editTextEmail = findViewById(R.id.editTextEmailAddress)
         editTextPassword = findViewById(R.id.editTextPassword)
         loginButton = findViewById(R.id.btnLogin)
@@ -41,7 +40,7 @@ class LoginActivity : ComponentActivity() {
             finish()
         }
 
-        if(sharedPreferences.getString("loginStatus", "false").equals("true")){
+        if (sharedPreferences.getString("loginStatus", "false").equals("true")) {
             var intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -53,14 +52,14 @@ class LoginActivity : ComponentActivity() {
         var password: String
         email = editTextEmail.text.toString()
         password = editTextPassword.text.toString()
-        var user: User = User(email=email, password=password)
+        var user: User = User(email = email, password = password)
         RetrofitClient.apiService.postLogin(user)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
-                    if(response.isSuccessful){
+                    if (response.isSuccessful) {
                         var responseBody = response.body()?.string()
                         var jsonObject: JSONObject = JSONObject(responseBody)
                         var jsonObjectData: JSONObject = jsonObject.getJSONObject("data")
@@ -82,14 +81,21 @@ class LoginActivity : ComponentActivity() {
                         var intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
-                    }
-                    else {
-                        Toast.makeText(applicationContext, "Error please try again", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "Error please try again",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Toast.makeText(applicationContext, "Error" + t.localizedMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Error" + t.localizedMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             })
     }

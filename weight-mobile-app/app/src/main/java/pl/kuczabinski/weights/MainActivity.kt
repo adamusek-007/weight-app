@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         sharedPreferences = application.getSharedPreferences("pl.kuczabinski.weights", MODE_PRIVATE)
 
-        if(sharedPreferences.getString("loginStatus", "false").equals("false")){
+        if (sharedPreferences.getString("loginStatus", "false").equals("false")) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
