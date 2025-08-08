@@ -11,7 +11,7 @@
     tools:context=".LoginActivity">
 
     <EditText
-        android:id="@+id/editTextEmailAddress"
+        android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

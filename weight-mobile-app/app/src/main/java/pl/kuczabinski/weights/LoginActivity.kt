@@ -28,7 +28,7 @@ class LoginActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         sharedPreferences = application.getSharedPreferences("pl.kuczabinski.weights", MODE_PRIVATE)
-        editTextEmail = findViewById(R.id.editTextEmailAddress)
+        editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         loginButton = findViewById(R.id.btnLogin)
         loginButton.setOnClickListener { loginUser() }

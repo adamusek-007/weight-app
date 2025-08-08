@@ -21,14 +21,15 @@ class RegisterActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
         editTextName = findViewById(R.id.editTextName)
-        editTextEmail = findViewById(R.id.editTextEmailAddress)
+        editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         button = findViewById(R.id.btnRegister)
-        button.setOnClickListener { regUser() }
+        button.setOnClickListener { registerUser() }
     }
 
-    fun regUser() {
+    fun registerUser() {
         var name: String
         var email: String
         var password: String
