@@ -8,4 +8,4 @@ Route::get('/', function () {
 });
 
 
-// Route::post('/weights', [WeightController::class, 'store']);
+Route::post('/weights', [WeightController::class, 'store']);
