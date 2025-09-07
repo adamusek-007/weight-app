@@ -70,14 +70,19 @@ class AuthController extends Controller
                 ]
             );
         }
+
         $validated = $validate->validated();
+
         if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']])) {
             $user = $request->user();
-            $token = $user->createToken('mobile_auth_token')->plainTextToken;
+            $expiryDate = now()->addMonths(3);
+
+            $token = $user->createToken('mobile_auth_token', ['*'], $expiryDate)->plainTextToken;
+
             return response()->json(
                 [
                     "status" => "success",
-                    "data" => ['user' => $user, 'token' => $token],
+                    "data" => ['token' => $token, 'expiry_date' => $expiryDate->toDateTimeString()],
                     "message" => "Logged in successfully"
                 ]
             );
