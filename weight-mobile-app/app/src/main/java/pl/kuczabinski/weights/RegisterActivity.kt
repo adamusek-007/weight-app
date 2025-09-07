@@ -38,7 +38,7 @@ class RegisterActivity : ComponentActivity() {
         password = editTextPassword.text.toString()
         var user: User = User(name = name, email = email, password = password)
 
-        RetrofitClient.apiService.postRegister(user)
+        RetrofitClient.getClient(this).register(user)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,

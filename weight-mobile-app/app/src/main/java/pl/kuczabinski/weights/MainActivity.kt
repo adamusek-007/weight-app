@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
         val weightValue = editTextWeight.text.toString().toFloatOrNull()
         if (weightValue != null) {
             val weight = Weight(weightValue)
-            RetrofitClient.apiService.sendWeight(weight)
+            RetrofitClient.getClient(this).sendWeight(weight)
                 .enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,

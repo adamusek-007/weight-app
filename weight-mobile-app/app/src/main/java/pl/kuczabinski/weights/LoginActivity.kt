@@ -75,7 +75,7 @@ class LoginActivity : ComponentActivity() {
         val password: String = editTextPassword.text.toString()
         val user: User = User(email = email, password = password)
 
-        RetrofitClient.apiService.postLogin(user)
+        RetrofitClient.getClient(this).login(user)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
@@ -108,7 +108,7 @@ class LoginActivity : ComponentActivity() {
     private fun successfulnessActions(response: Response<ResponseBody>) {
         val jsonResponse = getJsonResponse(response)
 
-        var status: String = jsonResponse.getString("status")
+        val status: String = jsonResponse.getString("status")
 
         if (status == "success") {
             loginUserInApp(jsonResponse);
