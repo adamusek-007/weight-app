@@ -1,14 +1,28 @@
 package pl.kuczabinski.weights
 
+import android.content.Context
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.100.71:8000/api/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    private var retrofit: Retrofit? = null
+    private const val ENDPOINT_ADDRESS: String = "http://192.168.100.71:8000/api/"
 
-    val apiService: ApiService = retrofit.create(ApiService::class.java)
+    fun getClient(context: Context):ApiService {
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor(context))
+            .build()
+
+        if (retrofit == null) {
+            retrofit = Retrofit.Builder()
+                .baseUrl(ENDPOINT_ADDRESS)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+        }
+        return retrofit!!.create(ApiService::class.java)
+    }
 }
 
