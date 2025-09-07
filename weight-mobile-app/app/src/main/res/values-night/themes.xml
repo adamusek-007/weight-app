@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:windowBackground">@color/md_theme_background</item>
         <item name="colorBackgroundFloating">@color/md_theme_background</item>

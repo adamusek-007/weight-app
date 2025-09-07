@@ -9,7 +9,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.compose.material3.AlertDialog
 import androidx.core.content.edit
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -26,7 +25,6 @@ class LoginActivity : ComponentActivity() {
     private lateinit var sharedPreferences: SharedPreferences
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,13 +32,14 @@ class LoginActivity : ComponentActivity() {
 
         val userIsLogged = checkUserLoginStatus();
 
-        if (userIsLogged){
+        if (userIsLogged) {
             startMainActivity();
         } else {
             constructView();
         }
     }
-    private fun constructView(){
+
+    private fun constructView() {
         setContentView(R.layout.activity_login)
 
         editTextEmail = findViewById(R.id.editTextEmail)
@@ -54,11 +53,13 @@ class LoginActivity : ComponentActivity() {
             startRegisterActivity()
         }
     }
-    private fun startRegisterActivity(){
+
+    private fun startRegisterActivity() {
         val intent = Intent(applicationContext, RegisterActivity::class.java)
         startActivity(intent)
         finish()
     }
+
     private fun startMainActivity() {
         val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
@@ -92,6 +93,7 @@ class LoginActivity : ComponentActivity() {
                         ).show()
                     }
                 }
+
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     // Error connecting to server
                     Toast.makeText(
@@ -114,7 +116,8 @@ class LoginActivity : ComponentActivity() {
             displayError(jsonResponse);
         }
     }
-    private fun displayError(jsonResponse: JSONObject){
+
+    private fun displayError(jsonResponse: JSONObject) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setTitle("Błąd logowania")
             .setMessage("Hasło niepoprawne!")
@@ -122,7 +125,7 @@ class LoginActivity : ComponentActivity() {
             .show()
     }
 
-    private fun loginUserInApp(jsonResponse: JSONObject){
+    private fun loginUserInApp(jsonResponse: JSONObject) {
         val jsonObjectData: JSONObject = jsonResponse.getJSONObject("data")
 
         var token: String = jsonObjectData.getString("token")

@@ -1,54 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".LoginActivity">
 
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_corner"
         android:ems="10"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:padding="10dp"
-        android:background="@drawable/rounded_corner"
-        android:textColor="@color/md_theme_secondary"
-        android:layout_marginBottom="10dp"
-        android:hint="Email" />
+        android:textColor="@color/md_theme_secondary" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:background="@drawable/rounded_corner"
-        android:textColor="@color/md_theme_secondary"
-        android:padding="10dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_corner"
+        android:ems="10"
+        android:hint="Paswsword"
         android:inputType="textPassword"
-        android:hint="Paswsword" />
+        android:padding="10dp"
+        android:textColor="@color/md_theme_secondary" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
         android:background="@drawable/button_login"
+        android:text="Login"
 
         />
 
     <TextView
+        android:id="@+id/textReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textReg"
-        android:text="Register now"
         android:layout_marginTop="10dp"
-        />
+        android:text="Register now" />
 
 </LinearLayout>
