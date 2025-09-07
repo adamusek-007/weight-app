@@ -12,12 +12,12 @@ interface ApiService {
     ): Call<ResponseBody>
 
     @POST("register")
-    fun postRegister(
+    fun register(
         @Body user: User
     ): Call<ResponseBody>
 
     @POST("login")
-    fun postLogin(
+    fun login(
         @Body user: User
     ): Call<ResponseBody>
 }
