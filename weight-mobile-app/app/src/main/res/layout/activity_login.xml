@@ -16,6 +16,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="@color/md_theme_secondary"
+        android:layout_marginBottom="10dp"
         android:hint="Email" />
 
     <EditText
@@ -23,6 +27,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:background="@drawable/rounded_corner"
+        android:textColor="@color/md_theme_secondary"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
         android:inputType="textPassword"
         android:hint="Paswsword" />
 
@@ -31,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:background="@color/material_dynamic_secondary50"
+        android:background="@drawable/button_login"
 
         />
 
