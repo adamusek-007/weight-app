@@ -1,5 +1,6 @@
 package pl.kuczabinski.weights
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.compose.material3.AlertDialog
 import androidx.core.content.edit
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -24,35 +26,54 @@ class LoginActivity : ComponentActivity() {
     private lateinit var sharedPreferences: SharedPreferences
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+
         sharedPreferences = application.getSharedPreferences("pl.kuczabinski.weights", MODE_PRIVATE)
+
+        val userIsLogged = checkUserLoginStatus();
+
+        if (userIsLogged){
+            startMainActivity();
+        } else {
+            constructView();
+        }
+    }
+    private fun constructView(){
+        setContentView(R.layout.activity_login)
+
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         loginButton = findViewById(R.id.btnLogin)
-        loginButton.setOnClickListener { loginUser() }
         registerTextView = findViewById(R.id.textReg)
 
-        registerTextView.setOnClickListener {
-            var intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        loginButton.setOnClickListener { loginUser() }
 
-        if (sharedPreferences.getString("loginStatus", "false").equals("true")) {
-            var intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+        registerTextView.setOnClickListener {
+            startRegisterActivity()
         }
     }
+    private fun startRegisterActivity(){
+        val intent = Intent(applicationContext, RegisterActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+    private fun startMainActivity() {
+        val intent = Intent(applicationContext, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 
-    fun loginUser() {
-        var email: String
-        var password: String
-        email = editTextEmail.text.toString()
-        password = editTextPassword.text.toString()
-        var user: User = User(email = email, password = password)
+    private fun checkUserLoginStatus(): Boolean {
+        return sharedPreferences.getString("loginStatus", "false").equals("true");
+    }
+
+    private fun loginUser() {
+        val email: String = editTextEmail.text.toString()
+        val password: String = editTextPassword.text.toString()
+        val user: User = User(email = email, password = password)
+
         RetrofitClient.apiService.postLogin(user)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
@@ -60,28 +81,10 @@ class LoginActivity : ComponentActivity() {
                     response: Response<ResponseBody>
                 ) {
                     if (response.isSuccessful) {
-                        var responseBody = response.body()?.string()
-                        var jsonObject: JSONObject = JSONObject(responseBody)
-                        var jsonObjectData: JSONObject = jsonObject.getJSONObject("data")
-                        var jsonObjectUser: JSONObject = jsonObjectData.getJSONObject("user")
-
-                        var token: String = jsonObjectData.getString("token")
-                        var name: String = jsonObjectUser.getString("name")
-                        var email: String = jsonObjectUser.getString("email")
-
-                        var status: String = jsonObject.getString("status")
-
-                        sharedPreferences.edit {
-                            putString("token", token)
-                            putString("name", name)
-                            putString("email", email)
-                            putString("loginStatus", "true")
-                        }
-
-                        var intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        // Return code is between 200 - 300
+                        successfulnessActions(response)
                     } else {
+                        // Some error occured 404, 500
                         Toast.makeText(
                             applicationContext,
                             "Error please try again",
@@ -89,8 +92,8 @@ class LoginActivity : ComponentActivity() {
                         ).show()
                     }
                 }
-
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    // Error connecting to server
                     Toast.makeText(
                         applicationContext,
                         "Error" + t.localizedMessage,
@@ -99,4 +102,45 @@ class LoginActivity : ComponentActivity() {
                 }
             })
     }
+
+    private fun successfulnessActions(response: Response<ResponseBody>) {
+        val jsonResponse = getJsonResponse(response)
+
+        var status: String = jsonResponse.getString("status")
+
+        if (status == "success") {
+            loginUserInApp(jsonResponse);
+        } else {
+            displayError(jsonResponse);
+        }
+    }
+    private fun displayError(jsonResponse: JSONObject){
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setTitle("Błąd logowania")
+            .setMessage("Hasło niepoprawne!")
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+
+    private fun loginUserInApp(jsonResponse: JSONObject){
+        val jsonObjectData: JSONObject = jsonResponse.getJSONObject("data")
+
+        var token: String = jsonObjectData.getString("token")
+        val tokenExpiryDateTime = jsonObjectData.getString("expiry_date");
+
+        sharedPreferences.edit {
+            putString("token", token)
+            putString("token_expiry", tokenExpiryDateTime)
+            putString("loginStatus", "true")
+        }
+
+        startMainActivity();
+    }
+
+    private fun getJsonResponse(response: Response<ResponseBody>): JSONObject {
+        val responseBody = response.body()?.string()
+        val jsonObject: JSONObject = JSONObject(responseBody)
+        return jsonObject
+    }
+
 }
