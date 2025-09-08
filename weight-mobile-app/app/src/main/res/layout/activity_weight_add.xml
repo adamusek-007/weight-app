@@ -7,4 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".WeightAddActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/editTextWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Podaj wagę"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/buttonSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wyślij wagę" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

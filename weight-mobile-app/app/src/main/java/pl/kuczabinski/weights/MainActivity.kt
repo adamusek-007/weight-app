@@ -15,8 +15,7 @@ import retrofit2.Response
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var editTextWeight: EditText
-    private lateinit var buttonSend: Button
+    private lateinit var startWeightAddActivityBtn: Button
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,39 +30,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        editTextWeight = findViewById(R.id.editTextWeight)
-        buttonSend = findViewById(R.id.buttonSend)
+        startWeightAddActivityBtn = findViewById(R.id.startWeightActivityBtn);
 
-        buttonSend.setOnClickListener {
-            sendWeightValueToApi()
+        startWeightAddActivityBtn.setOnClickListener {
+            val intent = Intent(this, WeightAddActivity::class.java)
+            startActivity(intent)
         }
-    }
 
-    private fun sendWeightValueToApi() {
-        val weightValue = editTextWeight.text.toString().toFloatOrNull()
-        if (weightValue != null) {
-            val weight = Weight(weightValue)
-            RetrofitClient.getClient(this).sendWeight(weight)
-                .enqueue(object : Callback<ResponseBody> {
-                    override fun onResponse(
-                        call: Call<ResponseBody>,
-                        response: Response<ResponseBody>
-                    ) {
-                        if (response.isSuccessful) {
-                            Toast.makeText(this@MainActivity, "Wysłano!", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(this@MainActivity, "Błąd serwera!", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        Toast.makeText(this@MainActivity, "Błąd sieci!", Toast.LENGTH_SHORT).show()
-                        Log.e("API_ERROR", "onFailure: ${t.message}", t)
-                    }
-                })
-        } else {
-            Toast.makeText(this, "Podaj poprawną wagę", Toast.LENGTH_SHORT).show()
-        }
     }
 }
