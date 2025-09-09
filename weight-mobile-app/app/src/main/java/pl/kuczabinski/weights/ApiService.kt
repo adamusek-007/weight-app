@@ -3,6 +3,7 @@ package pl.kuczabinski.weights
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
@@ -20,4 +21,9 @@ interface ApiService {
     fun login(
         @Body user: User
     ): Call<ResponseBody>
+
+    @GET("weights")
+    fun getWeights(): Call<ApiResponse>
+
+
 }
