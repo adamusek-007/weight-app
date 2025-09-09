@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    tools:context=".WeightAddActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -11,11 +13,25 @@
         android:textSize="28dp"
         android:text="Hej Adam!"/>
 
-
     <Button
+        android:layout_marginTop="20dp"
         android:id="@+id/startWeightActivityBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dodaj wagę"/>
+        android:text="Dodaj wagę"
+        android:background="@drawable/rounded_corner"/>
 
+    <FrameLayout
+        android:layout_marginTop="10dp"
+        android:padding="20dp"
+        android:background="@drawable/rounded_corner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.github.mikephil.charting.charts.LineChart
+            android:background="@color/md_theme_onPrimary"
+            android:id="@+id/weightChart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            />
+    </FrameLayout>
 </LinearLayout>
