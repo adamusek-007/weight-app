@@ -31,4 +31,18 @@ class WeightController extends Controller
             'data' => $weight
         ], 201);
     }
+    public function index(){
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthenticated'], 401);
+        }
+
+        $weights = $user->weights()->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $weights
+        ]);
+    }
 }

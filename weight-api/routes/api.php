@@ -15,4 +15,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/list', function () {
         return App\Models\User::all();
     });
+    Route::get('/weights', [WeightController::class, 'index']);
 });
