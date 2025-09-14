@@ -1,11 +1,14 @@
 package pl.kuczabinski.weights.weight
 
-import androidx.room.vo.Dao
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
+
 import pl.kuczabinski.weights.db.WeightDBEntry
 
 @Dao
-
-
 interface WeightDao {
 
     @Insert
@@ -13,6 +16,7 @@ interface WeightDao {
 
     @Update
     suspend fun update(weightEntry: WeightDBEntry)
+
     @Delete
     suspend fun markAsDeleted(id: String)
 
