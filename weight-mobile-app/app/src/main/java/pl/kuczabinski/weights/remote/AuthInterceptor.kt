@@ -1,4 +1,4 @@
-package pl.kuczabinski.weights
+package pl.kuczabinski.weights.remote
 
 import android.content.Context
 import okhttp3.Interceptor

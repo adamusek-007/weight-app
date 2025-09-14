@@ -1,4 +1,6 @@
-package pl.kuczabinski.weights
+package pl.kuczabinski.weights.remote
+
+import pl.kuczabinski.weights.WeightEntry
 
 data class ApiResponse(
     val status: String,

@@ -7,6 +7,8 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import pl.kuczabinski.weights.remote.ApiResponse
+import pl.kuczabinski.weights.remote.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

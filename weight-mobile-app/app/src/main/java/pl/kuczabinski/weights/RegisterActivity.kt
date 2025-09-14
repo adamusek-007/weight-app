@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import okhttp3.ResponseBody
+import pl.kuczabinski.weights.remote.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

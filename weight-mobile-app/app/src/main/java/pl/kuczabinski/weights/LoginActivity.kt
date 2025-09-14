@@ -12,6 +12,7 @@ import androidx.activity.ComponentActivity
 import androidx.core.content.edit
 import okhttp3.ResponseBody
 import org.json.JSONObject
+import pl.kuczabinski.weights.remote.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
