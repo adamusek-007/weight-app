@@ -1,4 +1,4 @@
-package pl.kuczabinski.weights
+package pl.kuczabinski.weights.weight
 
 data class WeightEntry(
     val id: Int,

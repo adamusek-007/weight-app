@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.ComponentActivity
 import com.github.mikephil.charting.charts.LineChart
+import pl.kuczabinski.weights.weight.WeightAddActivity
+import pl.kuczabinski.weights.weight.WeightChartMaker
 
 class MainActivity : ComponentActivity() {
 

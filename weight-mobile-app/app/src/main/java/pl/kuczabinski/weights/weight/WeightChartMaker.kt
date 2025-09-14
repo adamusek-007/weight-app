@@ -1,5 +1,6 @@
-package pl.kuczabinski.weights
+package pl.kuczabinski.weights.weight
 
+import android.R
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.LineChart
@@ -7,7 +8,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
-import pl.kuczabinski.weights.remote.ApiResponse
+import pl.kuczabinski.weights.weight.WeightEntry
 import pl.kuczabinski.weights.remote.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,11 +40,11 @@ class WeightChartMaker(private val context: Context, private val chart: LineChar
         val entries = parseWeightsToEntries(weights)
 
         val dataSet = LineDataSet(entries, "Historia wagi").apply {
-            color = ContextCompat.getColor(context, android.R.color.holo_blue_dark)
-            valueTextColor = ContextCompat.getColor(context, android.R.color.black)
+            color = ContextCompat.getColor(context, R.color.holo_blue_dark)
+            valueTextColor = ContextCompat.getColor(context, R.color.black)
             lineWidth = 2f
             circleRadius = 4f
-            setCircleColor(ContextCompat.getColor(context, android.R.color.holo_blue_dark))
+            setCircleColor(ContextCompat.getColor(context, R.color.holo_blue_dark))
         }
 
         val lineData = LineData(dataSet)
