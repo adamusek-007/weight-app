@@ -2,7 +2,7 @@ package pl.kuczabinski.weights.remote
 
 import okhttp3.ResponseBody
 import pl.kuczabinski.weights.User
-import pl.kuczabinski.weights.Weight
+import pl.kuczabinski.weights.weight.Weight
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

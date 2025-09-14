@@ -2,10 +2,11 @@ package pl.kuczabinski.weights.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import pl.kuczabinski.weights.weight.WeightDao
 
 @Database(
     entities = [
-        WeightEntry::class
+        WeightDBEntry::class
     ],
     version = 1,
     exportSchema = false

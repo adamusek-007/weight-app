@@ -1,4 +1,4 @@
-package pl.kuczabinski.weights
+package pl.kuczabinski.weights.weight
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import okhttp3.ResponseBody
+import pl.kuczabinski.weights.R
 import pl.kuczabinski.weights.remote.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
