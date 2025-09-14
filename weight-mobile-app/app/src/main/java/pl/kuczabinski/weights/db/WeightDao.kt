@@ -18,7 +18,7 @@ interface WeightDao {
     @Update
     suspend fun update(weightEntry: WeightEntry)
     @Delete
-    suspend fun markAsDeleted(id: String)
+    suspend fun delete(id: String)
 
     @Query("SELECT * FROM weight_entries ORDER BY id ASC")
     suspend fun getAll(): List<WeightEntry>
