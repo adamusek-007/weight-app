@@ -8,12 +8,12 @@ class WeightRepository(
 //    private val syncManager: SyncManager
 ) {
 
-    fun getWeightEntries(): List<WeightEntry> {
+    fun getWeightEntries(): List<WeightDBEntry> {
         return localDao.getAll()
     }
 
     fun addWeightEntry(weight: Float) {
-        val entry = WeightEntry(
+        val entry = WeightDBEntry(
             weight = weight
         )
         localDao.insert(entry)
