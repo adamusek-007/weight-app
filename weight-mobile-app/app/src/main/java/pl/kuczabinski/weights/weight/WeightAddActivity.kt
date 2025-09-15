@@ -10,7 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import okhttp3.ResponseBody
+import pl.kuczabinski.weights.db.DatabaseProvider
+import pl.kuczabinski.weights.db.WeightRepository
 import pl.kuczabinski.weights.remote.RetrofitClient
+import pl.kuczabinski.weights.weight.Weight
+import pl.kuczabinski.weights.weight.WeightEntry
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
