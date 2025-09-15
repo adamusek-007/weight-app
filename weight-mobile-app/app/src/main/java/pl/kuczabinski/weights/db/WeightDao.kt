@@ -13,18 +13,18 @@ import pl.kuczabinski.weights.Weight
 interface WeightDao {
 
     @Insert
-    suspend fun insert(weightEntry: WeightEntry): String
+    fun insert(weightEntry: WeightEntry): String
 
     @Update
-    suspend fun update(weightEntry: WeightEntry)
+    fun update(weightEntry: WeightEntry)
     @Delete
-    suspend fun delete(id: String)
+    fun delete(id: String)
 
     @Query("SELECT * FROM weight_entries ORDER BY id ASC")
-    suspend fun getAll(): List<WeightEntry>
+    fun getAll(): List<WeightEntry>
 
     @Query("SELECT * FROM weight_entries WHERE id = :id")
-    suspend fun getById(id: Long)
+    fun getById(id: Long)
 
 
 
