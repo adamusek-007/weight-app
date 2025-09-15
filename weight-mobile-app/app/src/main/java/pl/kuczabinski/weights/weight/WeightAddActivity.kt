@@ -10,14 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import okhttp3.ResponseBody
-import pl.kuczabinski.weights.db.DatabaseProvider
-import pl.kuczabinski.weights.db.WeightEntry
-import pl.kuczabinski.weights.db.WeightRepository
 import pl.kuczabinski.weights.remote.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.Date
 
 class WeightAddActivity : AppCompatActivity() {
     private lateinit var editTextWeight: EditText
