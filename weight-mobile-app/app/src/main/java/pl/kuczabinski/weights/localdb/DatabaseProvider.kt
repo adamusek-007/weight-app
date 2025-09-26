@@ -1,4 +1,4 @@
-package pl.kuczabinski.weights.db
+package pl.kuczabinski.weights.localdb
 
 import android.content.Context
 import androidx.room.Room
